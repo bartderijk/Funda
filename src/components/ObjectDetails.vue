@@ -28,7 +28,7 @@
           <div class="column is-one-quarter">
             <div>
               <p class="heading ">Prijs</p>
-              <p class="title">{{ data.Koopprijs }}</p>
+              <p class="title">{{ formattedPrice }}</p>
             </div>
           </div>
           <div class="column is-two-quarter">
@@ -94,6 +94,11 @@ export default {
       'data',
       'hasError',
     ]),
+    formattedPrice() {
+      return new Intl.NumberFormat('nl-NL', {
+        style: 'currency', currency: 'EUR', notation: 'compact',
+      }).format(this.data.Koopprijs);
+    },
   },
 };
 </script>
