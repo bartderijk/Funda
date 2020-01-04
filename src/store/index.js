@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLoading: true,
+    hasError: false,
     key: apiKey,
     objectId: 'f88c78e9-fba7-446a-a23c-a37b26fc904b',
     data: {},
@@ -21,6 +22,11 @@ export default new Vuex.Store({
       state.data = data;
       state.isLoading = false;
     },
+    handleError(state, error) {
+      state.hasError = true;
+      state.errorMsg = error;
+      state.isLoading = false;
+    },
   },
   actions: {
     getData({ state, getters }) {
@@ -29,6 +35,9 @@ export default new Vuex.Store({
         state.isLoading = false;
         return;
       }
+
+      // reset error state
+      state.hasError = false;
 
       // Use a proxy to circumvent the inability of getting data locally
       // https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141
@@ -39,9 +48,8 @@ export default new Vuex.Store({
 
       // lets get the data
       get(proxyurl + url)
-        // use setData to save the result to the store
-        .then(response => this.commit('setData', response.data));
-      // @TODO error handling
+        .then(response => this.commit('setData', response.data)) // use setData to save the result to the store
+        .catch(error => this.commit('handleError', error)); // deal with errors using handleError
     },
   },
 });

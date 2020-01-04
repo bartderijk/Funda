@@ -8,6 +8,16 @@
         Looks like you're missing the <code>apiKey</code>. Add it in <code>config.js</code> in the root of the project.
       </div>
     </div>
+
+    <div v-if="hasError" class="message is-warning">
+      <div class="message-header">
+        <p>Error while getting data</p>
+      </div>
+      <div class="message-body">
+        Looks like something went wrong when we tried to get the data. Please refresh the page, or try again later.
+      </div>
+    </div>
+
     <section v-if="hasData" class="level">
       <div class="level-item has-text-centered">
         <div>
@@ -49,6 +59,7 @@ export default {
     ]),
     ...mapState([
       'data',
+      'hasError',
     ]),
   },
 };
