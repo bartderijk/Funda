@@ -2,18 +2,21 @@
   <div id="app">
     <TopHero/>
     <ObjectDetails/>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import TopHero from './components/TopHero.vue';
 import ObjectDetails from './components/ObjectDetails.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   name: 'app',
   components: {
     TopHero,
     ObjectDetails,
+    Footer,
   },
   mounted() {
     // Mounted is part of the Vue instance lifecycle, this hook gets
