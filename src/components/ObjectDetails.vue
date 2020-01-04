@@ -18,32 +18,65 @@
       </div>
     </div>
 
-    <section v-if="hasData" class="level">
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Bouwjaar</p>
-          <p class="title">{{ data.Bouwjaar }}</p>
-        </div>
+    <template v-if="hasData">
+      <div class="container">
+        <section class="columns">
+          <div class="column is-one-quarter">
+            <h3 class="title is-4">{{ data.Adres}}</h3>
+            <h3 class="subtitle">{{ data.Plaats}}</h3>
+          </div>
+          <div class="column is-one-quarter">
+            <div>
+              <p class="heading ">Prijs</p>
+              <p class="title">{{ data.Koopprijs }}</p>
+            </div>
+          </div>
+          <div class="column is-two-quarter">
+          <section class="level">
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading ">Bouwjaar</p>
+                <p class="title">{{ data.Bouwjaar }}</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Wonen</p>
+                <p class="title">{{ data.WoonOppervlakte }}m²</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Aantal kamers</p>
+                <p class="title">{{ data.AantalKamers }}</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading">Perceel</p>
+                <p class="title">{{ data.PerceelOppervlakte }}m²</p>
+              </div>
+            </div>
+          </section>
+          </div>
+        </section>
       </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Wonen</p>
-          <p class="title">{{ data.WoonOppervlakte }}m²</p>
-        </div>
+
+      <hr>
+
+      <div class="columns">
+        <div class="column">
+            <img :src="data.HoofdFoto" alt="Hoofdfoto">
+          </div>
+          <div class="column">
+            <ul class="image-list">
+              <li v-for="image in data['Media-Foto']" :key="image.id">
+                <img :src="image" alt="image of the object">
+              </li>
+            </ul>
+          </div>
       </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Aantal kamers</p>
-          <p class="title">{{ data.AantalKamers }}</p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Perceel</p>
-          <p class="title">{{ data.PerceelOppervlakte }}m²</p>
-        </div>
-      </div>
-    </section>
+    </template>
   </div>
 </template>
 
@@ -67,4 +100,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+  .image-list li {
+    display: inline;
+    margin-right: 8px;
+  }
 </style>
