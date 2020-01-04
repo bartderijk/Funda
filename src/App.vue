@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <TopHero/>
+    <ProcessIndicator/>
     <ObjectDetails/>
     <Footer/>
   </div>
@@ -9,6 +10,7 @@
 <script>
 import TopHero from './components/TopHero.vue';
 import ObjectDetails from './components/ObjectDetails.vue';
+import ProcessIndicator from './components/ProcessIndicator.vue';
 import Footer from './components/Footer.vue';
 
 export default {
@@ -16,6 +18,7 @@ export default {
   components: {
     TopHero,
     ObjectDetails,
+    ProcessIndicator,
     Footer,
   },
   mounted() {

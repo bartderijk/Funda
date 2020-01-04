@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isLoading: true,
     key: apiKey,
     objectId: 'f88c78e9-fba7-446a-a23c-a37b26fc904b',
     data: {},
@@ -18,12 +19,14 @@ export default new Vuex.Store({
   mutations: {
     setData(state, data) {
       state.data = data;
+      state.isLoading = false;
     },
   },
   actions: {
     getData({ state, getters }) {
       // We're not making the call if the key is missing
       if (getters.hasMissingApiKey) {
+        state.isLoading = false;
         return;
       }
 

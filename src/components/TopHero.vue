@@ -1,5 +1,5 @@
 <template>
-  <section  class="hero is-primary is-bold">
+  <section class="hero is-primary is-bold">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
@@ -23,4 +23,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .hero {
+      margin-bottom: 16px;
+  }
 </style>
