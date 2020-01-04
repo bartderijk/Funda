@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <TopHero msg="Lorem ipsum dolor sitamet"/>
+    <TopHero/>
   </div>
 </template>
 

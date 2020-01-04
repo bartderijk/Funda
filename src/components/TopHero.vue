@@ -1,8 +1,13 @@
 <template>
-  <section  class="hero is-medium is-primary is-bold">
+  <section  class="hero is-primary is-bold">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">{{ msg }}</h1>
+                <h1 class="title">
+                  Funda coding exercise
+                </h1>
+                <h2 class="subtitle">
+                  Using the Funda API to get insight on some object's details
+                </h2>
             </div>
         </div>
     </section>
