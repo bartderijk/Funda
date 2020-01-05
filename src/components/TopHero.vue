@@ -23,7 +23,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .hero {
-      margin-bottom: 16px;
-  }
 </style>

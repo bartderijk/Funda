@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <section class="section">
     <div v-if="hasMissingApiKey" class="message is-warning">
       <div class="message-header">
         <p>Missing API key</p>
@@ -19,47 +19,66 @@
     </div>
 
     <template v-if="hasData">
-      <div class="container">
-        <section class="columns">
-          <div class="column is-one-quarter">
-            <h3 class="title is-4">{{ data.Adres}}</h3>
-            <h3 class="subtitle">{{ data.Plaats}}</h3>
+      <div class="columns">
+        <!-- <div class="column is-one-quarter">
+          <h3 class="title is-4">{{ data.Adres}}</h3>
+          <h3 class="subtitle">{{ data.Plaats}}</h3>
+        </div>
+        <div class="column is-one-quarter">
+          <div>
+            <p class="heading ">Prijs</p>
+            <p class="title">{{ formattedPrice }}</p>
           </div>
-          <div class="column is-one-quarter">
-            <div>
-              <p class="heading ">Prijs</p>
-              <p class="title">{{ formattedPrice }}</p>
+        </div> -->
+        <div class="column is-one-quarter">
+          <div class="level">
+            <div class="level-item">
+              <div>
+                <h4 class="heading">Adres</h4>
+                <h1 class="title">{{ data.Adres }}</h1>
+                <h2 class="subtitle is-4">{{ data.Plaats }}</h2>
+              </div>
             </div>
           </div>
-          <div class="column is-two-quarter">
-          <section class="level">
-            <div class="level-item has-text-centered">
+        </div>
+        <div class="column is-one-quarter">
+          <div class="level">
+            <div class="level-item">
               <div>
-                <p class="heading ">Bouwjaar</p>
-                <p class="title">{{ data.Bouwjaar }}</p>
+                <h4 class="heading">Prijs</h4>
+                <h1 class="title">{{ formattedPrice }}</h1>
               </div>
             </div>
-            <div class="level-item has-text-centered">
-              <div>
-                <p class="heading">Wonen</p>
-                <p class="title">{{ data.WoonOppervlakte }}m²</p>
-              </div>
-            </div>
-            <div class="level-item has-text-centered">
-              <div>
-                <p class="heading">Aantal kamers</p>
-                <p class="title">{{ data.AantalKamers }}</p>
-              </div>
-            </div>
-            <div class="level-item has-text-centered">
-              <div>
-                <p class="heading">Perceel</p>
-                <p class="title">{{ data.PerceelOppervlakte }}m²</p>
-              </div>
-            </div>
-          </section>
           </div>
-        </section>
+        </div>
+        <div class="column is-two-quarter">
+          <div class="level">
+            <div class="level-item has-text-centered">
+              <div>
+                <h4 class="heading">Bouwjaar</h4>
+                <h1 class="title">{{ data.Bouwjaar }}</h1>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <h4 class="heading">>Wonen</h4>
+                <h1 class="title">{{ data.WoonOppervlakte }}m²</h1>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <h4 class="heading">Aantal kamers</h4>
+                <h1 class="title">{{ data.AantalKamers }}</h1>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <h4 class="heading">Perceel</h4>
+                <h1 class="title">{{ data.PerceelOppervlakte }}m²</h1>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <hr>
@@ -77,7 +96,7 @@
           </div>
       </div>
     </template>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -108,5 +127,9 @@ export default {
   .image-list li {
     display: inline;
     margin-right: 8px;
+  }
+
+  .title:not(.is-spaced) + .subtitle  {
+    margin-top: 0rem;
   }
 </style>
