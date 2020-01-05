@@ -79,8 +79,8 @@
           </div>
           <div class="column">
             <ul class="image-list">
-              <li v-for="(image, index) in data['Media-Foto']" :key="image.id">
-                <img v-lazy="image" @click="openGallery(index)" alt="image of the object">
+              <li v-for="(image, index) in galleryImages" :key="image.id">
+                <img v-lazy="image.thumb" @click="openGallery(index)" alt="image of the object">
               </li>
             </ul>
             <LightBox
@@ -116,13 +116,20 @@ export default {
     ]),
     galleryImages() {
       // format the data to bitesize chunks for lightbox
+      // @TODO Fix a bug, which causes some empty images to pass thru
       return this.data.Media.map((item) => {
         const container = {};
 
-        if (item.MediaItems && item.MediaItems[2] && item.MediaItems[0]) {
+        // lots of checks to ensure we're working with valid urls
+        if (item.MediaItems
+            && item.MediaItems[2]
+            && item.MediaItems[0]
+            && item.MediaItems[0].Url.indexOf('xml') === -1
+            && item.MediaItems[2].Url.indexOf('xml') === -1) {
           container.thumb = item.MediaItems[0].Url;
           container.src = item.MediaItems[2].Url;
         }
+
         return container;
       });
     },
