@@ -1,4 +1,14 @@
-# funda
+# Funda
+To start off you'll need an `API key`, which can be found in the assignemt's brieving.
+Add it in `config.js` in the root, and you're good to go.
+
+Run `npm run serve` for development, or `npm run build` for a more optimized build.
+Still on the todo list are e2e tests, and I wasn't able to finish up the unit tests within the time limits.
+
+If anything's unclear, please reach out. I'm more than happy to help.
+
+Best,
+Bart
 
 ## Project setup
 ```
@@ -34,6 +44,3 @@ npm run test:e2e
 ```
 npm run test:unit
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
