@@ -13,7 +13,7 @@ export default new Vuex.Store({
     data: {},
   },
   getters: {
-    hasMissingApiKey: state => (state === ''),
+    hasMissingApiKey: state => (state.key === ''),
     hasData: state => Object.values(state.data).length > 0,
   },
   mutations: {
