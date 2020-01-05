@@ -20,16 +20,6 @@
 
     <template v-if="hasData">
       <div class="columns">
-        <!-- <div class="column is-one-quarter">
-          <h3 class="title is-4">{{ data.Adres}}</h3>
-          <h3 class="subtitle">{{ data.Plaats}}</h3>
-        </div>
-        <div class="column is-one-quarter">
-          <div>
-            <p class="heading ">Prijs</p>
-            <p class="title">{{ formattedPrice }}</p>
-          </div>
-        </div> -->
         <div class="column is-one-quarter">
           <div class="level">
             <div class="level-item">
@@ -61,7 +51,7 @@
             </div>
             <div class="level-item has-text-centered">
               <div>
-                <h4 class="heading">>Wonen</h4>
+                <h4 class="heading">Wonen</h4>
                 <h1 class="title">{{ data.WoonOppervlakte }}m²</h1>
               </div>
             </div>
@@ -89,10 +79,17 @@
           </div>
           <div class="column">
             <ul class="image-list">
-              <li v-for="image in data['Media-Foto']" :key="image.id">
-                <img :src="image" alt="image of the object">
+              <li v-for="(image, index) in data['Media-Foto']" :key="image.id">
+                <img v-lazy="image" @click="openGallery(index)" alt="image of the object">
               </li>
             </ul>
+            <LightBox
+              :images="galleryImages"
+              ref="lightbox"
+              :show-caption="true"
+              :show-light-box="false"
+            >
+            </LightBox>
           </div>
       </div>
     </template>
@@ -101,9 +98,13 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
+import LightBox from 'vue-image-lightbox';
 
 export default {
   name: 'ObjectDetails',
+  components: {
+    LightBox,
+  },
   computed: {
     ...mapGetters([
       'hasData',
@@ -113,10 +114,29 @@ export default {
       'data',
       'hasError',
     ]),
+    galleryImages() {
+      // format the data to bitesize chunks for lightbox
+      return this.data.Media.map((item) => {
+        const container = {};
+
+        if (item.MediaItems && item.MediaItems[2] && item.MediaItems[0]) {
+          container.thumb = item.MediaItems[0].Url;
+          container.src = item.MediaItems[2].Url;
+        }
+        return container;
+      });
+    },
     formattedPrice() {
+      // its nice to format the numbers, in this case NumberFormat makes it easy
       return new Intl.NumberFormat('nl-NL', {
-        style: 'currency', currency: 'EUR', notation: 'compact',
+        style: 'currency', currency: 'EUR',
       }).format(this.data.Koopprijs);
+    },
+  },
+  methods: {
+    openGallery(index) {
+      // this should call the right lightbox image
+      this.$refs.lightbox.showImage(index);
     },
   },
 };
@@ -127,6 +147,7 @@ export default {
   .image-list li {
     display: inline;
     margin-right: 8px;
+    cursor: pointer;
   }
 
   .title:not(.is-spaced) + .subtitle  {
