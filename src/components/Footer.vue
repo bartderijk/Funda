@@ -17,4 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
+  .footer {
+    margin-top: 16px;
+  }
 </style>
