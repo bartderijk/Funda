@@ -12,6 +12,7 @@ import TopHero from './components/TopHero.vue';
 import ObjectDetails from './components/ObjectDetails.vue';
 import ProcessIndicator from './components/ProcessIndicator.vue';
 import Footer from './components/Footer.vue';
+import apiKey from '../config';
 
 export default {
   name: 'app',
@@ -24,7 +25,8 @@ export default {
   mounted() {
     // Mounted is part of the Vue instance lifecycle, this hook gets
     // called after the instance has been mounted.
-    // Soon as this is done, we'll haul in the data with getData
+    // Soon as this is done, we'll set the key and haul in the data with getData
+    this.$store.commit('setApiKey', apiKey);
     this.$store.dispatch('getData');
   },
 };

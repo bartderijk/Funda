@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import get from 'axios';
-import apiKey from '../../config';
 
 Vue.use(Vuex);
 
@@ -9,12 +8,12 @@ export default new Vuex.Store({
   state: {
     isLoading: true,
     hasError: false,
-    key: apiKey,
+    key: '',
     objectId: 'f88c78e9-fba7-446a-a23c-a37b26fc904b',
     data: {},
   },
   getters: {
-    hasMissingApiKey: state => (!state.key),
+    hasMissingApiKey: state => (state === ''),
     hasData: state => Object.values(state.data).length > 0,
   },
   mutations: {
@@ -26,6 +25,12 @@ export default new Vuex.Store({
       state.hasError = true;
       state.errorMsg = error;
       state.isLoading = false;
+    },
+    setApiKey(state, keyVal) {
+      // The exact format of the key is unknown, so we'll only check for the basics
+      if (keyVal && keyVal !== '') {
+        state.key = keyVal;
+      }
     },
   },
   actions: {
