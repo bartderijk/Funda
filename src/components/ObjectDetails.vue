@@ -116,22 +116,23 @@ export default {
     ]),
     galleryImages() {
       // format the data to bitesize chunks for lightbox
-      // @TODO Fix a bug, which causes some empty images to pass thru
-      return this.data.Media.map((item) => {
-        const container = {};
-
-        // lots of checks to ensure we're working with valid urls
+      const media = this.data.Media;
+      const result = media.filter((item) => {
+        // filter out images we cant work with
         if (item.MediaItems
             && item.MediaItems[2]
             && item.MediaItems[0]
             && item.MediaItems[0].Url.indexOf('xml') === -1
             && item.MediaItems[2].Url.indexOf('xml') === -1) {
-          container.thumb = item.MediaItems[0].Url;
-          container.src = item.MediaItems[2].Url;
+          return true;
         }
-
-        return container;
-      });
+        return false;
+      })
+        .map(item => ({
+          thumb: item.MediaItems[0].Url,
+          src: item.MediaItems[2].Url,
+        }));
+      return result;
     },
     formattedPrice() {
       // its nice to format the numbers, in this case NumberFormat makes it easy
